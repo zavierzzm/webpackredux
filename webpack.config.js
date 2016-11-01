@@ -2,18 +2,13 @@
 
 var webpack = require('webpack');
 
-var ROOT_PATH = fullPath('../');
-var SRC_PATH = ROOT_PATH + '/src';
-var DIST_PATH = ROOT_PATH + '/dist';
-
 var config = {
-    context: SRC_PATH,
-    entry: {
-        app: ['./pages/app.js']
-    },
+    entry: [
+        './src/js/index.js'
+    ],
     output: {
-        path: DIST_PATH,
-        filename: 'js/bundle.js'
+        path: './build',
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -28,8 +23,16 @@ var config = {
             }
         ]
     },
-    resolve: {},
-    plugins: []
+    devServer: {
+        hot: true,
+        inline: true
+    },
+    resolve: {
+        extensions: ['', '.js', '.json']
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };
 
 module.exports = config;
